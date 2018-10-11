@@ -20,5 +20,16 @@ class Interface:
         ent.place(x=_x, y=_y)
         return ent
 
+    def radio_group(self, _x, _y, names,**options):
+        var = tkinter.IntVar()
+        var.set(1)
+        count = 1
+        for name in names:
+            rb = tkinter.Radiobutton(self.root, text=name, variable=var, value=count, **options)
+            rb.place(x=_x, y=_y + 20 * count)
+            count += 1
+
+        return var
+
     def start(self):
         self.root.mainloop()
