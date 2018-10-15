@@ -5,7 +5,7 @@ class Interface:
 
     def __init__(self, width, height):
         self.root = tkinter.Tk()
-        self.root.geometry("" + str(width) + "x" + str(height) + "+800+100")
+        self.root.geometry("" + str(width) + "x" + str(height) + "+500+100")
 
     def button(self, _x, _y, _text, **options):
         btn = tkinter.Button(self.root, text=_text, **options)
