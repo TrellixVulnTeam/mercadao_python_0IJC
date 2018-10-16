@@ -33,3 +33,9 @@ class Interface:
 
     def start(self):
         self.root.mainloop()
+
+    @staticmethod
+    def get_entry_class():
+        return tkinter.Entry
+
+
