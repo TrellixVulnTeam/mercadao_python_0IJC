@@ -1,15 +1,38 @@
 from Interface import Interface as GUI
+
 def campos_estao_preenchidos(*campos):
     for campo in campos:
-        if len(campo.get()) <= 0 or campo.get() == "":
-            return False
+        if isinstance(campo, GUI.get_entry_class()):
+            if len(campo.get()) <= 0 or campo.get() == "":
+                return False
     return True
+
+def limpar_campos(*campos):
+    for campo in campos:
+        if isinstance(campo, GUI.get_entry_class()):
+            campo.delete(0, len(campo.get()))
+
+def cadastrar_cliente():
+    if campos_estao_preenchidos(nome_cliente, cpf_cliente, email_cliente, telefone_cliente):
+        # TODO cadastro de cliente no banco de dados
+        pass
+    else:
+        print("campos não estão preenchidos")
+
+def cadastrar_produto():
+    if campos_estao_preenchidos(codigo_produto, descricao_produto, preco_produto):
+        # TODO cadastro de produto no banco de dados
+        pass
+    else:
+        print("campos não estão preenchidos")
+
 
 tela = GUI(800, 500)
 
 # titulo da pagina
 tela.label(30, 20, "Mercadão Python", font=("Arial", 20))
 
+# cadastro de produtos
 tela.label(30, 60, "Cadastro de produtos", font=("Arial", 12))
 
 tela.label(30, 100, "Codigo: ")
@@ -24,7 +47,8 @@ preco_produto = tela.entry(200, 180, 30)
 tela.label(30, 220, "Unidade de medida: ")
 radio_unidade_produto = tela.radio_group(200, 200, ["Un", "Kg", "M", "PC"])
 
-tela.button(280, 320, "Cadastrar produto")
+tela.button(280, 320, "Cadastrar produto", command=cadastrar_produto)
+tela.button(170, 320, "Limpar campos", command=lambda: limpar_campos(codigo_produto, descricao_produto, preco_produto))
 
 # cadastro de clientes
 tela.label(450, 60, "Cadastro de clientes", font=("Arial", 12))
@@ -41,9 +65,9 @@ email_cliente = tela.entry(580, 180, 30)
 tela.label(450, 220, "telefone: ")
 telefone_cliente = tela.entry(580, 220, 30)
 
-tela.button(660, 320, "Cadastrar cliente", command=lambda: (
-    print(campos_estao_preenchidos(nome_cliente, cpf_cliente, email_cliente, telefone_cliente))
-))
+tela.button(660, 320, "Cadastrar cliente", command=cadastrar_cliente)
+tela.button(550, 320, "Limpar Campos", command=lambda: limpar_campos(nome_cliente, cpf_cliente, email_cliente, telefone_cliente))
+
 tela.start()
 
 
