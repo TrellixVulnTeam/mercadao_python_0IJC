@@ -1,4 +1,9 @@
 from Interface import Interface as GUI
+def campos_estao_preenchidos(*campos):
+    for campo in campos:
+        if len(campo.get()) <= 0 or campo.get() == "":
+            return False
+    return True
 
 tela = GUI(800, 500)
 
@@ -36,5 +41,9 @@ email_cliente = tela.entry(580, 180, 30)
 tela.label(450, 220, "telefone: ")
 telefone_cliente = tela.entry(580, 220, 30)
 
-tela.button(660, 320, "Cadastrar cliente")
+tela.button(660, 320, "Cadastrar cliente", command=lambda: (
+    print(campos_estao_preenchidos(nome_cliente, cpf_cliente, email_cliente, telefone_cliente))
+))
 tela.start()
+
+
